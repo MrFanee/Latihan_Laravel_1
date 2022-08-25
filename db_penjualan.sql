@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 18, 2022 at 09:29 AM
+-- Generation Time: Aug 25, 2022 at 04:19 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -41,7 +41,13 @@ CREATE TABLE `barang` (
 
 INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga`, `stok`, `id_suplier`) VALUES
 (1, 'besi', 10000, 10, 1),
-(2, 'alumunium', 5000, 5, 2);
+(2, 'alumunium 2', 5000, 5, 2),
+(6, 'baja', 1000, 100, 2),
+(7, 'kuningan', 10000, 50, 2),
+(8, 'abc', 10000, 50, 2),
+(9, 'besi 2', 10000, 50, 1),
+(10, 'alumunium 2', 5000, 50, 2),
+(11, 'besi 2', 10000, 100, 1);
 
 -- --------------------------------------------------------
 
@@ -52,7 +58,7 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga`, `stok`, `id_suplier`)
 CREATE TABLE `pembeli` (
   `id_pembeli` int(10) NOT NULL,
   `nama_pembeli` varchar(20) NOT NULL,
-  `jk` char(1) NOT NULL,
+  `jk` varchar(15) NOT NULL,
   `no_tlp` char(12) NOT NULL,
   `alamat` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -62,8 +68,12 @@ CREATE TABLE `pembeli` (
 --
 
 INSERT INTO `pembeli` (`id_pembeli`, `nama_pembeli`, `jk`, `no_tlp`, `alamat`) VALUES
-(1, 'riska', 'P', '112233445566', 'jakarta'),
-(2, 'rini', 'P', '665544332211', 'bekasi');
+(1, 'riska', 'laki-laki', '112233445566', 'jakarta'),
+(2, 'rini', 'perempuan', '665544332211', 'bekasi'),
+(5, 'rini b', 'perempuan', '112233', 'bekasi'),
+(6, 'rini s', 'perempuan', '112233', 'bekasi'),
+(7, 'rini a', 'perempuan', '11223344', 'bekasi'),
+(8, 'irfan', 'laki-laki', '11334455', 'jakarta');
 
 -- --------------------------------------------------------
 
@@ -74,7 +84,7 @@ INSERT INTO `pembeli` (`id_pembeli`, `nama_pembeli`, `jk`, `no_tlp`, `alamat`) V
 CREATE TABLE `suplier` (
   `id_suplier` int(10) NOT NULL,
   `nama_suplier` varchar(20) NOT NULL,
-  `no_tlp` char(12) NOT NULL,
+  `no_tlp` varchar(12) NOT NULL,
   `alamat` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -84,7 +94,8 @@ CREATE TABLE `suplier` (
 
 INSERT INTO `suplier` (`id_suplier`, `nama_suplier`, `no_tlp`, `alamat`) VALUES
 (1, 'fatur rozak', '112233445566', 'jakarta'),
-(2, 'alif ramadhan', '665544332211', 'bekasi');
+(2, 'alif ramadhan', '665544332211', 'bekasi'),
+(3, 'rozi', '112233', 'bekasi');
 
 -- --------------------------------------------------------
 
@@ -106,7 +117,11 @@ CREATE TABLE `transaksi` (
 
 INSERT INTO `transaksi` (`id_transaksi`, `id_barang`, `id_pembeli`, `tanggal`, `keterangan`) VALUES
 (1, 2, 1, '2022-08-17', 'Lunas'),
-(2, 1, 2, '2022-08-18', 'Belum Lunas');
+(2, 1, 2, '2022-08-18', 'Belum Lunas'),
+(3, 3, 3, '2022-08-21', 'Lunas'),
+(4, 2, 3, '2022-08-21', 'Lunas'),
+(6, 3, 3, '2022-08-21', 'Lunas'),
+(7, 2, 3, '2022-08-20', 'Belum Lunas');
 
 --
 -- Indexes for dumped tables
@@ -136,6 +151,34 @@ ALTER TABLE `suplier`
 --
 ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`id_transaksi`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `barang`
+--
+ALTER TABLE `barang`
+  MODIFY `id_barang` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `pembeli`
+--
+ALTER TABLE `pembeli`
+  MODIFY `id_pembeli` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `suplier`
+--
+ALTER TABLE `suplier`
+  MODIFY `id_suplier` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `transaksi`
+--
+ALTER TABLE `transaksi`
+  MODIFY `id_transaksi` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
