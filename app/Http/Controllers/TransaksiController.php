@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use PDF;
-
+use Barryvdh\DomPDF\Facade\PDF;
 use App\Exports\TransaksiExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
@@ -45,14 +44,14 @@ class TransaksiController extends Controller
             'tanggal' => 'required',
             'keterangan' => 'required'
     	]);
- 
+
         transaksi::create([
     		'id_barang' => $request->id_barang,
             'id_pembeli' => $request->id_pembeli,
     		'tanggal' => $request->tanggal,
     		'keterangan' => $request->keterangan
     	]);
- 
+
     	return redirect('/transaksi');
     }
 

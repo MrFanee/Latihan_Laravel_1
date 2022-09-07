@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\jual;
+use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use PDF;
-
 use App\Exports\BarangExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
@@ -64,7 +63,7 @@ class JualController extends Controller
             'stok' => 'required',
             'id_suplier' => 'required'
     	]);
- 
+
         jual::create([
     		'nama_barang' => $request->nama_barang,
     		'harga' => $request->harga,
@@ -99,7 +98,7 @@ class JualController extends Controller
         $table_barang = DB::table('barang')->where('id_barang',$id_barang)->get();
         // passing data pegawai yang didapat ke view edit.blade.php
         return view('edit/editBarang',['barang' => $table_barang]);
-    
+
     }
 
     /**
