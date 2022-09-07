@@ -5,11 +5,10 @@ namespace App\Http\Controllers;
 use App\suplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use PDF;
-
 use App\Exports\SuplierExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class SuplierController extends Controller
 {
@@ -24,7 +23,6 @@ class SuplierController extends Controller
         $table_suplier= suplier::all();
         $pdf = PDF::loadview('pdf/suplier_pdf',['table_suplier'=>$table_suplier]);
         return $pdf->stream();
-        // return $pdf->download('laporan-pegawai-pdf');
     }
 
     public function export_excel()
@@ -44,13 +42,11 @@ class SuplierController extends Controller
             'no_tlp' => 'required',
             'alamat' => 'required'
     	]);
- 
         suplier::create([
     		'nama_suplier' => $request->nama_suplier,
     		'no_tlp' => $request->no_tlp,
     		'alamat' => $request->alamat
     	]);
- 
     	return redirect('/suplier');
     }
 
